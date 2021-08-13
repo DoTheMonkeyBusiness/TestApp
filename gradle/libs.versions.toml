@@ -1,0 +1,31 @@
+[versions]
+accompanist = "0.16.0" # https://github.com/google/accompanist
+androidgradle = "7.0.0"
+compose = "1.0.1" # https://developer.android.com/jetpack/androidx/releases/compose
+coroutines = "1.3.9"
+kotlin = "1.5.21" # https://kotlinlang.org/docs/releases.html#release-details
+serialization = "1.2.2"
+
+[libraries]
+plugin-android-gradle = { module = "com.android.tools.build:gradle", version.ref = "androidgradle" }
+plugin-kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+
+accompanist-placeholder = { module = "com.google.accompanist:accompanist-placeholder-material", version.ref = "accompanist" }
+
+android-material = "com.google.android.material:material:1.4.0"
+
+androidx-activity = "androidx.activity:activity-compose:1.3.1"
+androidx-appcompat = "androidx.appcompat:appcompat:1.3.1"
+androidx-core = "androidx.core:core-ktx:1.6.0"
+androidx-lifecycle-viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
+androidx-lifecycle-runtime = "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
+
+compose-ui-base = { module = "androidx.compose.ui:ui", version.ref = "compose" }
+compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
+compose-ui-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
+compose-ui-material = { module = "androidx.compose.material:material", version.ref = "compose" }
+compose-ui-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
+compose-ui-util = { module = "androidx.compose.ui:ui-util", version.ref = "compose" }
+
+kotlin-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+kotlin-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }
