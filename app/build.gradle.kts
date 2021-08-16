@@ -1,20 +1,36 @@
+import extension.getString
+
 plugins {
     id("com.android.application")
+    id("com.squareup.sqldelight")
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
     kotlin("android")
+    kotlin("plugin.serialization") version GradleConstants.Versions.serialization
 }
 
 val appVersionCode = 1
 val appVersionName = "1.0"
 
 android {
-    compileSdk = Versions.compileSDK
+    compileSdk = GradleConstants.Versions.compileSDK
 
     defaultConfig {
-        applicationId = "com.nasalevich.testapp"
-        minSdk = Versions.minSDK
-        targetSdk = Versions.targetSDK
+        applicationId = GradleConstants.appId
+        minSdk = GradleConstants.Versions.minSDK
+        targetSdk = GradleConstants.Versions.targetSDK
         versionCode = appVersionCode
         versionName = appVersionName
+    }
+
+    signingConfigs {
+        create("release") {
+            val properties = org.jetbrains.kotlin.konan.properties.loadProperties("$rootDir/local.properties")
+
+            storeFile = file("$rootDir/release-keystore")
+            storePassword = properties.getString("storePassword")
+            keyAlias = properties.getString("keyAlias")
+            keyPassword = properties.getString("keyPassword")
+        }
     }
 
     sourceSets {
@@ -24,6 +40,7 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
+            signingConfig = signingConfigs.getByName("release")
         }
     }
 
@@ -43,8 +60,11 @@ dependencies {
 
     implementation(libs.androidx.activity)
     implementation(libs.androidx.core)
-    implementation(libs.androidx.lifecycle.viewmodel)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.lifecycle.runtime)
+
+    implementation(libs.coil.kt)
+    implementation(libs.glide.kt)
 
     implementation(libs.compose.ui.base)
     implementation(libs.compose.ui.foundation)
@@ -53,5 +73,16 @@ dependencies {
     implementation(libs.compose.ui.tooling)
     implementation(libs.compose.ui.util)
 
+    implementation(libs.koin.compose)
+
     implementation(libs.kotlin.coroutines.android)
+
+    implementation(libs.kotlin.serialization.json)
+
+    implementation(libs.ktor.client.android)
+    implementation(libs.ktor.client.logging)
+    implementation(libs.ktor.client.serialization)
+
+    implementation(libs.sqldelight.android.driver)
+    implementation(libs.sqldelight.coroutines.extensions)
 }
