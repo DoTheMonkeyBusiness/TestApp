@@ -13,6 +13,8 @@ buildscript {
     dependencies {
         classpath(libs.plugin.kotlin.gradle)
         classpath(libs.plugin.android.gradle)
+        classpath(libs.plugin.secrets.gradle)
+        classpath(libs.plugin.sqldelight.gradle)
     }
 }
 

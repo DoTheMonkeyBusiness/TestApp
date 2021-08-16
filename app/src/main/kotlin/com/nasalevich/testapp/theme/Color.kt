@@ -1,4 +1,4 @@
-package com.nasalevich.testapp.ui.theme
+package com.nasalevich.testapp.theme
 
 import androidx.compose.ui.graphics.Color
 
