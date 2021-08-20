@@ -51,6 +51,16 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.compose.get()
     }
+
+    testOptions {
+        execution = "ANDROIDX_TEST_ORCHESTRATOR"
+        unitTests.apply {
+            isReturnDefaultValues = true
+            unitTests.all {
+                it.useJUnitPlatform()
+            }
+        }
+    }
 }
 
 dependencies {
@@ -83,6 +93,16 @@ dependencies {
     implementation(libs.ktor.client.logging)
     implementation(libs.ktor.client.serialization)
 
+    implementation(libs.logger.kermit)
+
     implementation(libs.sqldelight.android.driver)
     implementation(libs.sqldelight.coroutines.extensions)
+
+    testImplementation(libs.test.junit.jupiter.main)
+    testImplementation(libs.test.junit.jupiter.api)
+    testImplementation(libs.test.junit.jupiter.params)
+    testImplementation(libs.test.mockk)
+    testImplementation(libs.test.sqldelight)
+
+    testRuntimeOnly(libs.test.junit.jupiter.engine)
 }

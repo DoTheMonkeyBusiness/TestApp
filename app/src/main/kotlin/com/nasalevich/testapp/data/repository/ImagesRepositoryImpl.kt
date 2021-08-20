@@ -1,6 +1,6 @@
 package com.nasalevich.testapp.data.repository
 
-import android.util.Log
+import co.touchlab.kermit.Kermit
 import com.nasalevich.testapp.base.ApiService
 import com.nasalevich.testapp.data.entity.ImageEntity
 import com.nasalevich.testapp.db.imagesstorage.ImagesStorage
@@ -17,8 +17,9 @@ import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
 class ImagesRepositoryImpl(
-    private val imagesService: ApiService<List<ImageEntity>, Int>,
+    private val imagesService: ApiService<Int, List<ImageEntity>>,
     private val imagesStorage: ImagesStorage,
+    private val logger: Kermit,
 ) : ImagesRepository, CoroutineScope {
 
     private val coroutineScopeJob = Job()
@@ -72,7 +73,7 @@ class ImagesRepositoryImpl(
                 imagesStorage.insert(it)
             }
         } catch (e: Exception) {
-            e.message?.let { Log.e("ImagesRepositoryImpl", it) }
+            e.message?.let { logger.e { it } }
         }
     }
 }
