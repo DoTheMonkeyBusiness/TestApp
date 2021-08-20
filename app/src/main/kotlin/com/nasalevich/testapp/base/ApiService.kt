@@ -1,6 +1,6 @@
 package com.nasalevich.testapp.base
 
-interface ApiService<T, P> {
+interface ApiService<in P, out R> {
 
-    suspend fun load(param: P): T
+    suspend fun load(param: P): R
 }

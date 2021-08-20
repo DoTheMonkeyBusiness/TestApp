@@ -1,5 +1,8 @@
 package com.nasalevich.testapp.koin
 
+import co.touchlab.kermit.CommonLogger
+import co.touchlab.kermit.Kermit
+import co.touchlab.kermit.Logger
 import com.nasalevich.testapp.Database
 import com.nasalevich.testapp.data.repository.ImagesRepositoryImpl
 import com.nasalevich.testapp.data.service.ImagesService
@@ -20,14 +23,17 @@ val AppKoinModule = module {
             imagesService = ImagesService(
                 client = get(),
             ),
-            imagesStorage = get()
+            imagesStorage = get(),
+            logger = get(),
         )
     }
 
     single { ApiClientProvider.getHttpClient() }
     single { Database(AndroidSqliteDriver(Database.Schema, androidContext(), "testApp.db")) }
+    single { Kermit(logger = get()) }
 
     single<ImagesStorage> { ImagesStorageImpl(database = get()) }
+    single<Logger> { CommonLogger() }
 
     viewModel {
         HomeViewModel(

@@ -7,7 +7,7 @@ import io.ktor.client.request.*
 
 class ImagesService(
     private val client: HttpClient,
-) : ApiService<List<ImageEntity>, Int> {
+) : ApiService<Int, List<ImageEntity>> {
 
     override suspend fun load(param: Int): List<ImageEntity> = client.get("/images/search") {
         parameter("limit", param)
